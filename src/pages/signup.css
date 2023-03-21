@@ -1,0 +1,24 @@
+.table{
+    padding: 20px;
+}
+.username{
+    width: 100%;
+    margin: 0 auto 0 auto;
+}
+.google2 {background-image: url("../icons/google.png");
+width: 20%;}
+.facebook2 {background-image: url("../icons/facebook.png");}
+.heading{
+    font-weight: bold;
+    font-size: 40px;
+}
+.cover{
+    padding-left:10px ;
+    padding-right:10px;
+    display: flex;
+    align-items: center;
+    padding-bottom: 25px;
+}
+.input{
+    width: 100%
+}

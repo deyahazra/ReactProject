@@ -1,0 +1,99 @@
+*{
+    margin:0;
+    box-sizing: border-box;
+    font-family: "CustomFont";
+}
+@font-face {
+    font-family: "CustomFont";
+    src: url("../font/RolexLight.woff2");
+}
+body{
+    background-color: #FFF4E0;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.75em;
+}
+.cover{
+    background-color: #FFBF9B;
+    width: 50%;
+    height: 60%;
+    position: absolute;
+    left: 25%;
+    top: 20%;
+    border-radius: 1em;
+    box-shadow: 0 0.188em 1.550em rgb(173, 157, 157);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+.alt-login {
+    width: 80%;
+    height: 3em;
+    display: flex;
+    justify-content: space-around;
+}
+
+.alt-login div {
+    width: 47.5%;
+    height: 90%;
+    border-radius: 0.25em;
+    background-color: black;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+.google {
+    background-image: url("../icons/google.png");
+        }
+.facebook {background-image: url("../icons/facebook.png");}
+.heading{
+    /* width: 100%;
+    text-align: center; */
+    font-size: 50px;
+    font-weight: 600;
+    background-image: linear-gradient(to left, #B46060, #4D4D4D);
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+}
+.Link{
+    color: #B46060;
+}
+.Link:hover{
+    color: black;
+}
+
+.login-btn{
+    width: 26%;
+    height: 3em;
+    background-color: #B46060;
+    display: flex;
+    font-weight: bold;
+    text-size-adjust: auto;
+    justify-content: center;
+    align-items: center;
+    transition: 0.5s;
+    border-radius: 0.25em;
+    cursor: pointer;
+}
+
+.login-btn:hover { transform: scale(1.25);}
+
+.field{
+    width: 60%;
+
+}
+/* @media(min-width: 500px){
+    .cover{
+        width: 40%;
+        height:60%;
+    }
+    .heading{
+        font-size: ;
+    }
+} */
