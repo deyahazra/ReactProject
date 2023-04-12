@@ -1,0 +1,55 @@
+{
+  "profile": [
+    {
+      "first": "utsav",
+      "last": "utsa",
+      "email": "utsavdas10@gmail.com",
+      "password": "guitarislife10@",
+      "id": 2
+    },
+    {
+      "first": "Deya",
+      "last": "Hazra",
+      "email": "deyahazra28@gmail.com",
+      "password": "Iamdeya@2003",
+      "id": 3
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "name": "Basic Tee",
+      "imageSrc": "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg",
+      "imageAlt": "Front of men's Basic Tee in black.",
+      "price": "$35",
+      "color": "Black"
+    },
+    {
+      "id": 2,
+      "name": "Printed Tee",
+      "imageSrc": "https://assets.ajio.com/medias/sys_master/root/20210205/IVn3/601d5eaef997dd5c40e93544/-473Wx593H-460837565-pink-MODEL2.jpg",
+      "imageAlt": "Front of men's Printed Tee in Pink.",
+      "about": "This is a tee",
+      "price": "$45",
+      "color": "Pink"
+    },
+    {
+      "id": 3,
+      "name": "High Neck Tee",
+      "imageSrc": "https://media.maxfashion.com/i/max/C21KNT03REDDARK-C21KNT03-MXWN21073121_01-2100.jpg?$prodimg-d-prt-pdp$&$quality-standard$&fmt=auto&sm=c",
+      "imageAlt": "Front of men's High Neck Tee in Red.",
+      "about": "This is a tee",
+      "price": "$50",
+      "color": "Red"
+    },
+    {
+      "id": 4,
+      "name": "Hooded Tee",
+      "imageSrc": "https://lmsin.net/cdn-cgi/image/h=831,w=615,q=60,fit=cover/https://aaeff43fe32172cbcecc-ae2a4e9a8cbc330ede5588dedf56886e.lmsin.net/max/1000011693017-Green-OLIVEGREEN-1000011693017-26082022_01-2100.jpg",
+      "imageAlt": "Front of men's Hooded Tee in Green.",
+      "about": "This is a tee",
+      "price": "$50",
+      "color": "Green"
+    }
+  ]
+}

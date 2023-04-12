@@ -3,12 +3,19 @@ import "./signup.css"
 import { Container } from '@mui/material';
 import { Grid, Typography } from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { Link } from "react-router-dom";
-import validator from 'validator'
+import { Link,useNavigate } from "react-router-dom";
+import validator from 'validator';
+import axios from 'axios';
 
 const SignForm = () => {
+  const navigate=useNavigate()
+  const [email,setEmail]=useState('')
+  const [password,setPassword]=useState('')
+  const [first,setFirst]=useState('')
+  const [last,setLast]=useState('')
   const [emailError, setEmailError] = useState('')
   const validateEmail = (e) => {
+    setEmail(e.target.value)
     var email = e.target.value
 
     if (validator.isEmail(email)) {
@@ -17,9 +24,16 @@ const SignForm = () => {
       setEmailError('Enter valid Email !')
     }
   }
+  const firstName=(e)=>{
+    setFirst(e.target.value)
+  }
+  const lastName=(e)=>{
+    setLast(e.target.value)
+  }
 
   const [errorMessage, setErrorMessage] = useState('')
   const validate = (value) => {
+    setPassword(value)
     if (validator.isStrongPassword(value, {
       minLength: 8, minLowercase: 1,
       minUppercase: 1, minNumbers: 1, minSymbols: 1
@@ -29,20 +43,40 @@ const SignForm = () => {
       setErrorMessage('Is Not Strong Password')
     }
   }
+  const handleApi=()=>{
+    // console.log(first,last,email,password)
+    const prof={first,last,email,password}
+    console.log(prof)
+    fetch("http://localhost:4000/profile",{
+      method:'POST',
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify(prof)
+    })
+    .then(result=>{
+      console.log("add")
+      console.log(result.data)
+    })
+    .catch(error=>{
+      console.log(error)
+    })
+  }
+
   return (
     <div className="cover">
-      <Typography className="heading" sx={{ typography: { sm: 'h2', xs: 'h3' ,xxs:'h3'} }} >
+      <Typography className="heading" sx={{ typography: { sm: 'h2', xs: 'h4' ,xxs:'h4'} }} >
                 SIGN UP
       </Typography>
       <Grid  justifyContent="space-evenly" align='center' container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 2 }}>
         <Grid item md={6}>
-          <input className="input" type="text" placeholder="firstname" />
+          <input className="input" value={first} type="text" placeholder="firstname" 
+          onChange={(e)=> firstName(e)}/>
         </Grid>
         <Grid item md={6}>
-          <input className="input" type="text" placeholder="lastname" />
+          <input className="input" value={first} type="text" placeholder="lastname" 
+          onChange={(e)=> lastName(e)}/>
         </Grid>
         <Grid item md={12}>
-          <input className="username" type="text" placeholder="username/email"
+          <input className="username" value={email}  type="text" placeholder="username/email"
             onChange={(e) => validateEmail(e)}></input>
           <span style={{
             fontWeight: 'bold',
@@ -50,7 +84,7 @@ const SignForm = () => {
           }}>{emailError}</span>
         </Grid>
         <Grid item md={6}>
-          <input className="input" type="password" placeholder="passowrd"
+          <input className="input" value={password} type="password" placeholder="passowrd"
             onChange={(e) => validate(e.target.value)}></input>
           <br />
           {errorMessage === '' ? null :
@@ -64,7 +98,7 @@ const SignForm = () => {
         </Grid>
 
         <Grid item xs={12}>
-          <div className='login-btn'>Sign Up</div>
+          <div onClick={handleApi} className='login-btn'>Sign Up</div>
         </Grid>
         <Grid item xs={12}>
           <p className="text">Or sign up using </p>

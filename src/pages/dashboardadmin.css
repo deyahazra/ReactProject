@@ -1,0 +1,58 @@
+.button{
+    color:black;
+    background-color: red;
+    margin-bottom: 100px;
+    height: 10%;
+    width:5%;
+    /* width:87.5%; */
+    text-align: center;
+    position: absolute;
+    z-index: 1;
+    right: 15%;
+    position: sticky;
+    top:12%;
+    background: #34d947;
+    background-image: -webkit-linear-gradient(top, #34d947, #71cc26);
+    background-image: -moz-linear-gradient(top, #34d947, #71cc26);
+    background-image: -ms-linear-gradient(top, #34d947, #71cc26);
+    background-image: -o-linear-gradient(top, #34d947, #71cc26);
+    background-image: linear-gradient(to bottom, #34d947, #71cc26);
+    -webkit-border-radius: 30;
+    -moz-border-radius: 30;
+    border-radius: 60px;
+    font-family: Georgia;
+    color: #141114;
+    font-size: 25px;
+    padding: 8px 20px 10px 20px;
+    border: solid #1f628d 0px;
+    text-decoration: none;
+}
+.button:hover {
+    background: #3cfa48;
+    background-image: -webkit-linear-gradient(top, #3cfa48, #34d93f);
+    background-image: -moz-linear-gradient(top, #3cfa48, #34d93f);
+    background-image: -ms-linear-gradient(top, #3cfa48, #34d93f);
+    background-image: -o-linear-gradient(top, #3cfa48, #34d93f);
+    background-image: linear-gradient(to bottom, #3cfa48, #34d93f);
+    text-decoration: none;
+  }
+.ProlistAdmin .delbutton{
+    /* color: #1f628d;
+    background-color: #34d93f;
+    height: 20px; */
+    position: relative;
+    z-index: 1;
+}
+
+
+.ProlistAdmin{
+    background-color: #F9F5E7;
+    margin-top: 25%;
+    position: relative;
+    z-index: 0;
+}
+.modal{
+    position: relative;
+    z-index: 3;
+}
+

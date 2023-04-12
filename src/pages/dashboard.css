@@ -1,0 +1,30 @@
+.Nav{
+    position: -webkit-sticky;
+    position: fixed;
+    left:0;
+    z-index:100;
+    top: 0;
+    width: 100%; 
+}
+.Prolist{
+    background-color: #F9F5E7;
+    margin-top: 30%;
+}
+.Prolist .delbutton{
+    visibility: hidden;
+}
+#Prodes{
+    width:max-content;
+}
+.form{
+    padding-left: 5%;
+    padding-bottom: 5%;
+}
+.modal-container-content-scroll{
+    position: absolute;
+    width: auto;
+    height: calc(100% - 140px);
+    overflow-y: auto;
+    margin: 10px 30px 30px 30px;
+    padding: 0px 20px 0px 0px;
+}

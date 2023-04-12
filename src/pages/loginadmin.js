@@ -8,7 +8,7 @@ import { Container } from '@mui/material';
 import { Grid, Typography } from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
-const LoginForm = () => {
+const LoginAdmin = () => {
     const navigate=useNavigate()
     const [data,setData]=useState([])
     // const [loginstate,setLoginState]=useState(false)
@@ -44,7 +44,7 @@ const LoginForm = () => {
             
             localStorage.setItem("check",loginState.current)
             // console.log(loginstate)
-            navigate('/')
+            navigate('/dashboardadmin')
         }
         else{
             alert("Signup")
@@ -73,4 +73,4 @@ const LoginForm = () => {
         </div>
     )
 }
-export default LoginForm
+export default LoginAdmin
