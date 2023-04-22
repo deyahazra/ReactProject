@@ -6,6 +6,8 @@ import { Link ,useNavigate} from "react-router-dom";
 import { Container } from '@mui/material';
 // import JsonObject from "reactproject/db.json"
 import { Grid, Typography } from '@mui/material';
+import Swal from 'sweetalert2';
+import withReactContent from "sweetalert2-react-content";
 import useMediaQuery from '@mui/material/useMediaQuery';
 
 const LoginAdmin = () => {
@@ -19,7 +21,7 @@ const LoginAdmin = () => {
     const [password,setPassword]=useState('')
 
     useEffect(()=>{
-        fetch("http://localhost:4000/profile")
+        fetch("https://test-json-ppxw.onrender.com/profile")
         .then(response=>response.json().then(data=>({
             data:data
         })))
@@ -37,7 +39,7 @@ const LoginAdmin = () => {
         setPassword(e.target.value)
     }
     const handleApi=(e)=>{
-        
+        const MySwal = withReactContent(Swal)
         const log={email,password}
         if (email ==match && password==match2){
             loginState.current = true
@@ -47,7 +49,11 @@ const LoginAdmin = () => {
             navigate('/dashboardadmin')
         }
         else{
-            alert("Signup")
+            MySwal.fire({
+                title: <strong>Error!</strong>,
+                html: <i>Please Sign In</i>,
+                icon: 'error'
+              })
         }
     }
     return (

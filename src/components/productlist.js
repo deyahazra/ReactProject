@@ -15,6 +15,8 @@
 import React from "react";
 import  {useState ,useEffect,useRef} from "react";
 import EditModal from "./editModal";
+import Swal from 'sweetalert2';
+import withReactContent from "sweetalert2-react-content";
 import { Link ,useNavigate} from "react-router-dom";
 import ProductDes from "./productdes"
 
@@ -28,7 +30,7 @@ import ProductDes from "./productdes"
     const [prodata,setProdata]=useState([])
     // const [id,setID]=useState(null)
     useEffect(()=>{
-      fetch("http://localhost:4000/products")
+      fetch("https://test-json-ppxw.onrender.com/products")
       .then(response=>response.json().then(data=>({
           data:data
       })))
@@ -49,8 +51,23 @@ import ProductDes from "./productdes"
   };
     const handlebutton=(id)=>{
       console.log(id)
-      if (window.confirm("Do you want to remove?")){
-        fetch("http://localhost:4000/products/"+id,{
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire(
+            'Deleted!',
+            'Your file has been deleted.',
+            'success'
+          )
+      
+          fetch("https://test-json-ppxw.onrender.com/products/"+id,{
           method:'DELETE'
         })
         .then(res=>{
@@ -61,6 +78,9 @@ import ProductDes from "./productdes"
         })
       }
     }
+    )
+        }
+      
 // const handleEdit=(id)=>{
 //   setShowModal(true)
 // }
@@ -70,7 +90,7 @@ import ProductDes from "./productdes"
     return (
       <div >
         <div className="mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
-          <h2 className="text-2xl font-bold tracking-tight text-gray-900">Latest Products</h2>
+          <h1 className="text-4xl font-bold tracking-tight text-gray-900">Latest Products</h1>
           
           <div  className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
             {prodata.map((product) => (

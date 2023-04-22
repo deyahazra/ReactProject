@@ -6,12 +6,17 @@ import { XMarkIcon } from '@heroicons/react/24/outline'
 
 
 export default function ShoppingCart() {
+    const[shop,setShop]=useState([])
     const navigate=useNavigate()
-    var s=localStorage.getItem("proid")
+    var s=localStorage.getItem("shop")
+    // setShop(shop=>[...shop, s])
+    // setShop(s)
+    // localStorage.setItem('test',shop)
     
 
     
   const [open, setOpen] = useState(true)
+  
 
   const handleShopClose=()=>{
     setOpen(false)
@@ -21,7 +26,7 @@ export default function ShoppingCart() {
   const [prodata,setProdata]=useState([])
   useEffect(()=>{
     
-    fetch("http://localhost:4000/products/"+s)
+    fetch("https://test-json-ppxw.onrender.com/products/"+s)
     .then(response=>response.json().then(data=>({
         data:data
     })))

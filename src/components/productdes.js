@@ -63,10 +63,14 @@ function classNames(...classes) {
 }
 
 export default function ProductDes() {
+  // const [shop,setShop]=useState([])
+  const [prodata,setProdata]=useState([])
+  const a=[]
   var s=localStorage.getItem("proid")
   const handlebag=()=>{
     const MySwal = withReactContent(Swal)
-   
+    // setShop(shop=>[...shop, 1])
+    localStorage.setItem("shop",s)
     const Toast = MySwal.mixin({
       toast: true,
       position: 'top-end',
@@ -89,10 +93,10 @@ export default function ProductDes() {
 
   const [selectedColor, setSelectedColor] = useState(product.colors[0])
   const [selectedSize, setSelectedSize] = useState(product.sizes[2])
-  const [prodata,setProdata]=useState([])
+  
   useEffect(()=>{
     
-    fetch("http://localhost:4000/products/"+s)
+    fetch("https://test-json-ppxw.onrender.com/products/"+s)
     .then(response=>response.json().then(data=>({
         data:data
     })))

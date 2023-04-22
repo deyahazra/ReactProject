@@ -29,7 +29,7 @@ const Modal = ({isVisible,onClose}) => {
     const handleSave=()=>{
         const pro={name,about,price,imageSrc}
         console.log(pro)
-        fetch("http://localhost:4000/products",{
+        fetch("https://test-json-ppxw.onrender.com/products",{
         method:'POST',
         headers:{"Content-Type":"application/json"},
         body:JSON.stringify(pro)

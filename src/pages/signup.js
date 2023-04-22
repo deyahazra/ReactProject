@@ -5,6 +5,8 @@ import { Grid, Typography } from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { Link,useNavigate } from "react-router-dom";
 import validator from 'validator';
+import Swal from 'sweetalert2';
+import withReactContent from "sweetalert2-react-content";
 import axios from 'axios';
 
 const SignForm = () => {
@@ -44,10 +46,11 @@ const SignForm = () => {
     }
   }
   const handleApi=()=>{
+    const MySwal = withReactContent(Swal)
     // console.log(first,last,email,password)
     const prof={first,last,email,password}
     console.log(prof)
-    fetch("http://localhost:4000/profile",{
+    fetch("https://test-json-ppxw.onrender.com/profile",{
       method:'POST',
       headers:{"Content-Type":"application/json"},
       body:JSON.stringify(prof)
@@ -55,6 +58,12 @@ const SignForm = () => {
     .then(result=>{
       console.log("add")
       console.log(result.data)
+      MySwal.fire({
+        title: <strong>Good job!</strong>,
+        html: <i>You are Signed In</i>,
+        icon: 'success'
+      })
+      navigate("/login")
     })
     .catch(error=>{
       console.log(error)
@@ -72,7 +81,7 @@ const SignForm = () => {
           onChange={(e)=> firstName(e)}/>
         </Grid>
         <Grid item md={6}>
-          <input className="input" value={first} type="text" placeholder="lastname" 
+          <input className="input" value={last} type="text" placeholder="lastname" 
           onChange={(e)=> lastName(e)}/>
         </Grid>
         <Grid item md={12}>
