@@ -28,6 +28,7 @@ import ProductDes from "./productdes"
     const [imageSrc,setImgSrc]=useState('')
     const [showModal,setShowModal]=useState(false)
     const [prodata,setProdata]=useState([])
+     var r=localStorage.getItem("refresh")
     // const [id,setID]=useState(null)
     useEffect(()=>{
       fetch("https://test-json-ppxw.onrender.com/products")
@@ -37,7 +38,7 @@ import ProductDes from "./productdes"
       .then(res=>{
           setProdata(res.data)
         })
-   })
+   },[r])
 
     const navigate=useNavigate()
     
@@ -96,9 +97,6 @@ import ProductDes from "./productdes"
             {prodata.map((product) => (
               
               <div  key={product.id} className="group relative flex flex-col">
-                <button className="delbutton place-self-end bg-transparent hover:bg-yellow-500 text-yellow-700 font-semibold hover:text-white py-2 px-4 border border-yellow-500 hover:border-transparent rounded" onClick={()=>setShowModal(true)}>EDIT</button>
-                <EditModal className="modal" id={product.id} isVisible={showModal} onClose={()=>setShowModal(false)}>
-                  </EditModal>
                 <button className="delbutton place-self-end bg-transparent hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded" onClick={()=>handlebutton(product.id)}>DELETE</button>
                 <div   className="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80">
                 

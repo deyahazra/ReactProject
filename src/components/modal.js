@@ -3,13 +3,17 @@ import  {useState ,useEffect,useRef} from "react";
 import axios from 'axios';
 import { Link ,useNavigate} from "react-router-dom";
 import { Container } from '@mui/material';
+import Swal from 'sweetalert2'
+import withReactContent from "sweetalert2-react-content";
 // import JsonObject from "reactproject/db.json"
 import { Grid, Typography } from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { PhotoIcon, UserCircleIcon } from '@heroicons/react/24/solid'
 
 const Modal = ({isVisible,onClose}) => {
+  const navigate=useNavigate()
     const [name,setName]=useState('')
+    const [refresh,setRefresh]=useState(0)
     const [about,setAbout]=useState('')
     const [price,setPrice]=useState()
     const [imageSrc,setImgSrc]=useState('')
@@ -27,7 +31,8 @@ const Modal = ({isVisible,onClose}) => {
         setImgSrc(e.target.value)
     }
     const handleSave=()=>{
-        const pro={name,about,price,imageSrc}
+      // const MySwal = withReactContent(Swal)
+        const pro={name,about,price}
         console.log(pro)
         fetch("https://test-json-ppxw.onrender.com/products",{
         method:'POST',
@@ -35,8 +40,17 @@ const Modal = ({isVisible,onClose}) => {
         body:JSON.stringify(pro)
         })
         .then(result=>{
+          setRefresh(refresh+1)
+          localStorage.setItem('refresh',refresh)
         console.log("add")
         console.log(result.data)
+      //   MySwal.fire({ title: 'hello' }).then((result) => {
+      //     /* Read more about isConfirmed, isDenied below */
+      //     if (result.isConfirmed) {
+      //         
+      //     }
+      // })
+      // navigate('/dashboardadmin')
         })
         .catch(error=>{
         console.log(error)
