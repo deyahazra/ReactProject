@@ -22,7 +22,9 @@ import ProductDes from "./productdes"
 
   
   export default function ProductList() {
+    var t=localStorage.getItem("refresh")
     const [name,setName]=useState('')
+    const [refresh,setRefresh]=useState(t)
     const [about,setAbout]=useState('')
     const [price,setPrice]=useState()
     const [imageSrc,setImgSrc]=useState('')
@@ -38,7 +40,7 @@ import ProductDes from "./productdes"
       .then(res=>{
           setProdata(res.data)
         })
-   })
+   },[r])
 
     const navigate=useNavigate()
     
@@ -61,6 +63,8 @@ import ProductDes from "./productdes"
         cancelButtonColor: '#d33',
         confirmButtonText: 'Yes, delete it!'
       }).then((result) => {
+        setRefresh(refresh+ 1)
+        localStorage.setItem('refresh',refresh)
         if (result.isConfirmed) {
           Swal.fire(
             'Deleted!',
@@ -72,7 +76,7 @@ import ProductDes from "./productdes"
           method:'DELETE'
         })
         .then(res=>{
-          window.location.reload()
+          console.log("DELETED")
         })
         .catch((err)=>{
           console.log(err.message)
@@ -120,6 +124,7 @@ import ProductDes from "./productdes"
                     <p className="mt-1 text-sm text-gray-500">{product.color}</p>
                   </div>
                   <p className="text-sm font-medium text-gray-900">{product.price}</p>
+                  <p className="text-white"> {refresh}</p>
                 </div>
               </div>
             ))}

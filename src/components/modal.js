@@ -13,7 +13,7 @@ import { PhotoIcon, UserCircleIcon } from '@heroicons/react/24/solid'
 const Modal = ({isVisible,onClose}) => {
   const navigate=useNavigate()
     const [name,setName]=useState('')
-    const [refresh,setRefresh]=useState(0)
+    const [refresh,setRefresh]=useState(1)
     const [about,setAbout]=useState('')
     const [price,setPrice]=useState()
     const [imageSrc,setImgSrc]=useState('')
@@ -40,8 +40,9 @@ const Modal = ({isVisible,onClose}) => {
         body:JSON.stringify(pro)
         })
         .then(result=>{
-          setRefresh(refresh+1)
+          setRefresh(refresh+ 1)
           localStorage.setItem('refresh',refresh)
+          console.log(refresh)
         console.log("add")
         console.log(result.data)
       //   MySwal.fire({ title: 'hello' }).then((result) => {
@@ -50,7 +51,7 @@ const Modal = ({isVisible,onClose}) => {
       //         
       //     }
       // })
-      // navigate('/dashboardadmin')
+      navigate('/dashboardadmin')
         })
         .catch(error=>{
         console.log(error)
@@ -172,6 +173,7 @@ const Modal = ({isVisible,onClose}) => {
             
           Save
         </button>
+        <p className="text-white"> {refresh}</p>
       </div>
                 </form>
                 </div>
