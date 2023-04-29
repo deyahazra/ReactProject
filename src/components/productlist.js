@@ -38,7 +38,7 @@ import ProductDes from "./productdes"
       .then(res=>{
           setProdata(res.data)
         })
-   },[r])
+   })
 
     const navigate=useNavigate()
     
