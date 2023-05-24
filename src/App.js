@@ -13,6 +13,7 @@ import LoginAdmin from "./pages/loginadmin";
 import DashBoardAdmin from "./pages/dashboardadmin";
 import EditModal from "./components/editModal";
 import ShoppingCart from "./components/shoppingcart";
+import PDes from "./pages/prodes";
 function App() {
   return (
     <>
@@ -22,6 +23,7 @@ function App() {
       <Route path='/login' element={<LoginForm/>}></Route>
       <Route path='/loginadmin' element={<LoginAdmin/>}></Route>
       <Route path='/dashboardadmin' element={<DashBoardAdmin/>}></Route>
+      <Route path='/productdes' element={<PDes/>}></Route>
       <Route path='/productdes' element={<ProductDes/>}></Route>
       <Route path='/shoppingcart' element={<ShoppingCart/>}></Route>
       <Route path='/editmodal' element={<EditModal/>}></Route>

@@ -20,7 +20,8 @@
   ```
 */
 import  {useState ,useEffect,useRef} from "react";
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
+import "./productlist.css";
 import withReactContent from "sweetalert2-react-content";
 import { StarIcon } from '@heroicons/react/20/solid'
 import { RadioGroup } from '@headlessui/react'
@@ -48,6 +49,10 @@ const product = {
     'Pre-washed & pre-shrunk',
     'Ultra-soft 100% cotton',
   ],
+  breadcrumbs: [
+    { id: 1, name: 'Men' },
+    { id: 2, name: 'Clothing' },
+  ],
   details:
     'The 6-Pack includes two black, two white, and two heather gray Basic Tees. Sign up for our subscription service and be the first to get new, exciting colors, like our upcoming "Charcoal Gray" limited release.',
 }
@@ -63,13 +68,44 @@ function classNames(...classes) {
 }
 
 export default function ProductDes() {
+  const [match,setMatch]=useState([])
+  const e=localStorage.getItem("email")
+//   useEffect(()=>{
+//     fetch("https://json4.onrender.com/shopping")
+//     .then(response=>response.json().then(data=>({
+//         data:data
+//     })))
+//     .then(res=>{
+//         for (var i=0;i<res.data.length;i++){
+//             setMatch(res.data[i].email)
+        
+// }})
+//   })
   // const [shop,setShop]=useState([])
+  
   const [prodata,setProdata]=useState([])
+  const arr=[]
   const a=[]
   var s=localStorage.getItem("proid")
+  var user=localStorage.getItem("userid")
   const handlebag=()=>{
     const MySwal = withReactContent(Swal)
     // setShop(shop=>[...shop, 1])
+    
+    const up={e,prodata}
+    fetch("https://json4.onrender.com/shopping/"+user,{
+      method:'PUT',
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify(up)
+    })
+    .then(result=>{
+      console.log("add")
+      console.log(result.data)
+    })
+    .catch(error=>{
+      console.log(error)
+    })
+    //
     localStorage.setItem("shop",s)
     const Toast = MySwal.mixin({
       toast: true,
@@ -87,6 +123,7 @@ export default function ProductDes() {
       icon: 'success',
       title: 'Item added to Cart Successfully'
     })
+    
   }
 
 
@@ -96,7 +133,7 @@ export default function ProductDes() {
   
   useEffect(()=>{
     
-    fetch("https://test-json-ppxw.onrender.com/products/"+s)
+    fetch("https://json4.onrender.com/products/"+s)
     .then(response=>response.json().then(data=>({
         data:data
     })))
@@ -105,48 +142,49 @@ export default function ProductDes() {
         console.log(res.data.name)
       })
   })
+  
+  
   return (
-    <div className="bg-white" id ="Prodes">
-      
+    <div className="bg-white">
       <div className="pt-6">
         
 
         {/* Image gallery */}
         <div className="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">
-          <div className="aspect-w-3 aspect-h-4 hidden overflow-hidden rounded-lg lg:block">
+          <div className="aspect-h-4 aspect-w-3 hidden overflow-hidden rounded-lg lg:block">
             <img
               src={prodata.imageSrc}
-              alt={prodata.imageAlt}
+              alt={product.imageAlt}
               className="h-full w-full object-cover object-center"
             />
           </div>
           <div className="hidden lg:grid lg:grid-cols-1 lg:gap-y-8">
-            <div className="aspect-w-3 aspect-h-2 overflow-hidden rounded-lg">
+            <div className="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg">
               <img
                 src={prodata.imageSrc}
-                alt={prodata.imageAlt}
+                alt={product.imageAlt}
                 className="h-full w-full object-cover object-center"
               />
             </div>
-            <div className="aspect-w-3 aspect-h-2 overflow-hidden rounded-lg">
+            <div className="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg">
               <img
                 src={prodata.imageSrc}
-                alt={prodata.imageAlt}
+                alt={product.imageAlt}
                 className="h-full w-full object-cover object-center"
               />
             </div>
           </div>
-          <div className="aspect-w-4 aspect-h-5 sm:overflow-hidden sm:rounded-lg lg:aspect-w-3 lg:aspect-h-4">
+          <div className="aspect-h-5 aspect-w-4 lg:aspect-h-4 lg:aspect-w-3 sm:overflow-hidden sm:rounded-lg">
             <img
               src={prodata.imageSrc}
-              alt={prodata.imageAlt}
+              alt={product.imageAlt}
               className="h-full w-full object-cover object-center"
             />
           </div>
         </div>
 
         {/* Product info */}
-        <div className="mx-auto max-w-2xl px-4 pt-10 pb-16 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pt-16 lg:pb-24">
+        <div className="mx-auto max-w-2xl px-4 pb-16 pt-10 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-24 lg:pt-16">
           <div className="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
             <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">{prodata.name}</h1>
           </div>
@@ -185,7 +223,7 @@ export default function ProductDes() {
                 <h3 className="text-sm font-medium text-gray-900">Color</h3>
 
                 <RadioGroup value={selectedColor} onChange={setSelectedColor} className="mt-4">
-                  <RadioGroup.Label className="sr-only"> Choose a color </RadioGroup.Label>
+                  <RadioGroup.Label className="sr-only">Choose a color</RadioGroup.Label>
                   <div className="flex items-center space-x-3">
                     {product.colors.map((color) => (
                       <RadioGroup.Option
@@ -201,8 +239,7 @@ export default function ProductDes() {
                         }
                       >
                         <RadioGroup.Label as="span" className="sr-only">
-                          {' '}
-                          {color.name}{' '}
+                          {color.name}
                         </RadioGroup.Label>
                         <span
                           aria-hidden="true"
@@ -215,19 +252,17 @@ export default function ProductDes() {
                     ))}
                   </div>
                 </RadioGroup>
-              </div> 
+              </div>
 
               {/* Sizes */}
               <div className="mt-10">
                 <div className="flex items-center justify-between">
                   <h3 className="text-sm font-medium text-gray-900">Size</h3>
-                  <a href="#" className="text-sm font-medium text-indigo-600 hover:text-indigo-500">
-                    Size guide
-                  </a>
+              
                 </div>
 
                 <RadioGroup value={selectedSize} onChange={setSelectedSize} className="mt-4">
-                  <RadioGroup.Label className="sr-only"> Choose a size </RadioGroup.Label>
+                  <RadioGroup.Label className="sr-only">Choose a size</RadioGroup.Label>
                   <div className="grid grid-cols-4 gap-4 sm:grid-cols-8 lg:grid-cols-4">
                     {product.sizes.map((size) => (
                       <RadioGroup.Option
@@ -280,16 +315,17 @@ export default function ProductDes() {
               </div>
 
               <button
-                onClick={handlebag}
+              onClick={handlebag}
                 type="button"
-                className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 py-3 px-8 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+            
+                className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
               >
                 Add to bag
               </button>
             </form>
           </div>
 
-          <div className="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pt-6 lg:pb-16 lg:pr-8">
+          <div className="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pb-16 lg:pr-8 lg:pt-6">
             {/* Description and details */}
             <div>
               <h3 className="sr-only">Description</h3>
@@ -313,11 +349,11 @@ export default function ProductDes() {
               </div>
             </div>
 
-             <div className="mt-10">
+            <div className="mt-10">
               <h2 className="text-sm font-medium text-gray-900">Details</h2>
 
               <div className="mt-4 space-y-6">
-                <p className="text-sm text-gray-600">{product.details}</p>
+                <p className="text-sm text-gray-600">{prodata.about}</p>
               </div>
             </div>
           </div>

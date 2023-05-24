@@ -21,7 +21,7 @@ const LoginForm = () => {
     const [password,setPassword]=useState('')
 
     useEffect(()=>{
-        fetch("https://test-json-ppxw.onrender.com/profile")
+        fetch("https://json4.onrender.com/profile")
         .then(response=>response.json().then(data=>({
             data:data
         })))
@@ -29,6 +29,8 @@ const LoginForm = () => {
             for (var i=0;i<res.data.length;i++){
                 setmatch2(res.data[i].password)
                 setMatch(res.data[i].email)
+                localStorage.setItem('userid',res.data[i].id)
+
     }})
      })
     const isTabletOrMobile = useMediaQuery('(max-width:1224px)');
@@ -42,6 +44,8 @@ const LoginForm = () => {
         const MySwal = withReactContent(Swal)
         const log={email,password}
         if (email ==match && password==match2){
+            localStorage.setItem("email",email)
+            
             loginState.current = true
             
             localStorage.setItem("check",loginState.current)

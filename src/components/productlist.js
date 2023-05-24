@@ -14,6 +14,10 @@
 */
 import React from "react";
 import  {useState ,useEffect,useRef} from "react";
+import "./productlist.css"
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
+import Button from '@mui/material/Button';
 import EditModal from "./editModal";
 import Swal from 'sweetalert2';
 import withReactContent from "sweetalert2-react-content";
@@ -23,6 +27,7 @@ import ProductDes from "./productdes"
   
   export default function ProductList() {
     var t=localStorage.getItem("refresh")
+    const [load,setLoad]=useState(null)
     const [name,setName]=useState('')
     const [refresh,setRefresh]=useState(t)
     const [about,setAbout]=useState('')
@@ -33,12 +38,13 @@ import ProductDes from "./productdes"
      var r=localStorage.getItem("refresh")
     // const [id,setID]=useState(null)
     useEffect(()=>{
-      fetch("https://test-json-ppxw.onrender.com/products")
+      fetch("https://json4.onrender.com/products")
       .then(response=>response.json().then(data=>({
           data:data
       })))
       .then(res=>{
           setProdata(res.data)
+          setLoad(1)
         })
    },[r])
 
@@ -72,7 +78,7 @@ import ProductDes from "./productdes"
             'success'
           )
       
-          fetch("https://test-json-ppxw.onrender.com/products/"+id,{
+          fetch("https://json4.onrender.com/products/"+id,{
           method:'DELETE'
         })
         .then(res=>{
@@ -93,7 +99,15 @@ import ProductDes from "./productdes"
     
     
     return (
-      <div >
+      <div className="text-white xyz">
+        {load?load:
+        <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
+        }
         <div className="mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
           <h1 className="text-4xl font-bold tracking-tight text-gray-900">Latest Products</h1>
           

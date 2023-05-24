@@ -20,11 +20,17 @@ function classNames(...classes) {
 
 export default function Navbar() {
 
-  const handleShopping=()=>{
-    navigate('/shoppingcart')
-  }
+ 
 
   var loginstate=localStorage.getItem("check")
+  const handleShopping=()=>{
+    if (loginstate=='true'){
+      navigate('/shoppingcart')
+    }
+    else{
+      navigate('/login')
+    }
+  }
   // console.log(loginstate)
   // console.log(typeof(loginstate))
   if (loginstate =='true'){

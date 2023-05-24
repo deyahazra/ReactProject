@@ -21,7 +21,7 @@ const LoginAdmin = () => {
     const [password,setPassword]=useState('')
 
     useEffect(()=>{
-        fetch("https://test-json-ppxw.onrender.com/profile")
+        fetch("https://json4.onrender.com/profile")
         .then(response=>response.json().then(data=>({
             data:data
         })))

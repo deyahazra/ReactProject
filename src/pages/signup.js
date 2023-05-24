@@ -50,7 +50,7 @@ const SignForm = () => {
     // console.log(first,last,email,password)
     const prof={first,last,email,password}
     console.log(prof)
-    fetch("https://test-json-ppxw.onrender.com/profile",{
+    fetch("https://json4.onrender.com/profile",{
       method:'POST',
       headers:{"Content-Type":"application/json"},
       body:JSON.stringify(prof)
@@ -64,6 +64,21 @@ const SignForm = () => {
         icon: 'success'
       })
       navigate("/login")
+    })
+    .catch(error=>{
+      console.log(error)
+    })
+    //shopping url
+    const prodata=0
+    const p={email,prodata}
+    fetch("https://json4.onrender.com/shopping",{
+      method:'POST',
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify(p)
+    })
+    .then(result=>{
+      console.log("add")
+      console.log(result.data)
     })
     .catch(error=>{
       console.log(error)

@@ -11,6 +11,8 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { PhotoIcon, UserCircleIcon } from '@heroicons/react/24/solid'
 
 const Modal = ({isVisible,onClose}) => {
+  const[uploadfiles,setUploadfiles]=useState([])
+  
   const navigate=useNavigate()
     const [name,setName]=useState('')
     const [refresh,setRefresh]=useState(1)
@@ -18,6 +20,14 @@ const Modal = ({isVisible,onClose}) => {
     const [price,setPrice]=useState()
     const [imageSrc,setImgSrc]=useState('')
 
+    // const handleUploadFiles=files=>{
+    //   const uploaded=[...uploadfiles];
+    //   files.some((file)=>{
+    //     if (uploaded.findIndex((f)=>f.name===file.name)===-1){
+    //       uploaded.push(file)
+    //     }
+    //   })
+    // }
     const handleName=(e)=>{
         setName(e.target.value)
     }
@@ -28,13 +38,38 @@ const Modal = ({isVisible,onClose}) => {
         setPrice(e.target.value)
     }
     const handleImageSrc=(e)=>{
-        setImgSrc(e.target.value)
+        // console.log(e.target.files)
+        //store image url in jsonserver
+        // setImgSrc(e.target.files[0].name)
+        setImgSrc(URL.createObjectURL(e.target.files[0]))
+        // setImgSrc(e.target.files[0])
     }
     const handleSave=()=>{
-      // const MySwal = withReactContent(Swal)
-        const pro={name,about,price}
+      // const MySwal = withReactContent(Swal
+      // const formData = new FormData()
+      // formData.append('/image', imageSrc)
+      // console.log(formData)
+      // fetch(
+      //   'https://api.imgbb.com/1/upload?key=0fc979cdad76bbcf91fcb704e8cc1e21',
+      //   {
+      //     method: 'POST',
+      //     headers:{"Content-Type":"application/json"},
+      //     body: formData,
+      //   }
+      // )
+      //   .then((response) => response.json())
+      //   .then((result) => {
+      //     console.log('Success:', result);
+      //   })
+      //   .catch((error) => {
+      //     console.error('Error:', error);
+      //   })
+        
+
+        //main
+        const pro={name,about,price,imageSrc}
         console.log(pro)
-        fetch("https://test-json-ppxw.onrender.com/products",{
+        fetch("https://json4.onrender.com/products",{
         method:'POST',
         headers:{"Content-Type":"application/json"},
         body:JSON.stringify(pro)
@@ -146,7 +181,9 @@ const Modal = ({isVisible,onClose}) => {
                       className="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
                     >
                       <span>Upload a file</span>
-                      <input value={imageSrc} id="file-upload" name="file-upload" type="file" className="sr-only" 
+                      <input  id="file-upload" name="file-upload" type="file" className="sr-only" 
+                    
+                      accept='application/pdf,image/png'
                       onChange={(e)=> handleImageSrc(e)}
                       />
                     </label>

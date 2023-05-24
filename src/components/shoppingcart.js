@@ -8,7 +8,7 @@ import { XMarkIcon } from '@heroicons/react/24/outline'
 export default function ShoppingCart() {
     const[shop,setShop]=useState([])
     const navigate=useNavigate()
-    var s=localStorage.getItem("shop")
+    var s=localStorage.getItem("")
     // setShop(shop=>[...shop, s])
     // setShop(s)
     // localStorage.setItem('test',shop)
@@ -22,20 +22,57 @@ export default function ShoppingCart() {
     setOpen(false)
     navigate('/')
   }
+  const handleContinue=()=>{
+    navigate('/')
+  }
+  const e=localStorage.getItem("email")
+  var user=localStorage.getItem("userid")
+  const handleRemove=(id)=>{
+    console.log(id)
+    var prodata=0
+    const up={e,prodata}
+    
+    fetch("https://json4.onrender.com/shopping/"+user,{
+      method:'PUT',
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify(up)
+    })
+    .then(result=>{
+      console.log("add")
+      console.log(result.data)
+    })
+    .catch(error=>{
+      console.log(error)
+    })
+    }
+  
+  
+      
+  
 
   const [prodata,setProdata]=useState([])
+  var user=localStorage.getItem("userid")
   useEffect(()=>{
     
-    fetch("https://test-json-ppxw.onrender.com/products/"+s)
+    fetch("https://json4.onrender.com/shopping/"+user)
     .then(response=>response.json().then(data=>({
         data:data
     })))
     .then(res=>{
-        setProdata(res.data)
-        console.log(res.data.name)
+        setProdata(res.data.prodata)
+        console.log(res.data.prodata)
+      })
+      .catch(error=>{
+        console.log(error)
       })
   })
-
+  
+  console.log(prodata)
+  if(prodata==0) 
+  return 
+  (
+    <div>Empty List</div>
+  )
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={setOpen}>
@@ -110,6 +147,7 @@ export default function ShoppingCart() {
                                     <div className="flex">
                                       <button
                                         type="button"
+                                        onClick={handleRemove}
                                         className="font-medium text-indigo-600 hover:text-indigo-500"
                                       >
                                         Remove
@@ -143,7 +181,7 @@ export default function ShoppingCart() {
                           <button
                             type="button"
                             className="font-medium text-indigo-600 hover:text-indigo-500"
-                            onClick={() => setOpen(false)}
+                            onClick={handleContinue}
                           >
                             Continue Shopping
                             <span aria-hidden="true"> &rarr;</span>
