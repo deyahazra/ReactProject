@@ -36,7 +36,20 @@ import ProductDes from "./productdes"
     const [showModal,setShowModal]=useState(false)
     const [prodata,setProdata]=useState([])
      var r=localStorage.getItem("refresh")
+    const [imageSrc2,setImgSrc2]=useState('')
     // const [id,setID]=useState(null)
+  //   useEffect(()=>{
+  //     fetch("https://api.imgbb.com/1/upload?key=059011c0d0e892fc80c749d62aec0de4",{
+  //       method:'POST'
+  //     })
+  //     .then(response=>response.json().then(data=>({
+  //         data:data
+  //     })))
+  //     .then(res=>{
+  //         // setimageSrc2(res.data.url)
+  //         console.log(res.data.url)
+  //       })
+  //  })
     useEffect(()=>{
       fetch("https://json4.onrender.com/products")
       .then(response=>response.json().then(data=>({
@@ -90,8 +103,9 @@ import ProductDes from "./productdes"
       }
     }
     )
+    
         }
-      
+    
 // const handleEdit=(id)=>{
 //   setShowModal(true)
 // }
@@ -99,7 +113,7 @@ import ProductDes from "./productdes"
     
     
     return (
-      <div className="text-white xyz">
+      <div className="text-white xyz bg-white">
         {load?load:
         <Backdrop
         sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
@@ -120,7 +134,7 @@ import ProductDes from "./productdes"
                 
                   <img
                     
-                    src={product.imageSrc}
+                    src={product.imageSrc2}
                     alt={product.imageAlt}
                     className="h-full w-full object-cover object-center lg:h-full lg:w-full"
                   />

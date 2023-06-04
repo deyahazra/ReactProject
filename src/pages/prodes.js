@@ -1,4 +1,5 @@
 import "./dashboard.css"
+import "../components/productdes.css"
 import Navbar from "../components/navbar";
 import ProductList from "../components/productlist";
 import  {useState } from "react";
@@ -14,7 +15,7 @@ const PDes = () => {
     return(
         <div>
         <div className='Nav'>{Navbar()}</div>
-        <div className="Prolist">{ProductDes()}</div>
+        <div className="des">{ProductDes()}</div>
         </div>
     )
 }

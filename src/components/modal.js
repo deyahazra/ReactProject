@@ -19,6 +19,7 @@ const Modal = ({isVisible,onClose}) => {
     const [about,setAbout]=useState('')
     const [price,setPrice]=useState()
     const [imageSrc,setImgSrc]=useState('')
+    const [imageSrc2,setImgSrc2]=useState('')
 
     // const handleUploadFiles=files=>{
     //   const uploaded=[...uploadfiles];
@@ -41,33 +42,37 @@ const Modal = ({isVisible,onClose}) => {
         // console.log(e.target.files)
         //store image url in jsonserver
         // setImgSrc(e.target.files[0].name)
-        setImgSrc(URL.createObjectURL(e.target.files[0]))
+        setImgSrc(e.target.files[0])
+        console.log(e.target.files[0])
+        const formData = new FormData()
+        formData.append('image', imageSrc)
+        console.log(formData)
+        fetch(
+        'https://api.imgbb.com/1/upload?key=05de2cf74959dfc52e18e923380e2b5f',
+        {
+          method: 'POST',
+          // headers:{"Access-Control-Allow-Origin": "'https://api.imgbb.com/1",
+          //         "Content-Type":"application/json"},
+          body: formData,
+        }
+      )
+        .then((response) => response.json())
+        .then((result) => {
+          setImgSrc2(result.data.url)
+          console.log('Success:', result.data.url);
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        })
         // setImgSrc(e.target.files[0])
     }
     const handleSave=()=>{
       // const MySwal = withReactContent(Swal
-      // const formData = new FormData()
-      // formData.append('/image', imageSrc)
-      // console.log(formData)
-      // fetch(
-      //   'https://api.imgbb.com/1/upload?key=0fc979cdad76bbcf91fcb704e8cc1e21',
-      //   {
-      //     method: 'POST',
-      //     headers:{"Content-Type":"application/json"},
-      //     body: formData,
-      //   }
-      // )
-      //   .then((response) => response.json())
-      //   .then((result) => {
-      //     console.log('Success:', result);
-      //   })
-      //   .catch((error) => {
-      //     console.error('Error:', error);
-      //   })
+      
         
 
         //main
-        const pro={name,about,price,imageSrc}
+        const pro={name,about,price,imageSrc2}
         console.log(pro)
         fetch("https://json4.onrender.com/products",{
         method:'POST',

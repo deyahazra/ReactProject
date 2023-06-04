@@ -1,0 +1,9 @@
+.des{
+    
+    margin-top: 50rem;
+}
+  @media only screen and (min-width: 640px) {
+    .des {
+      margin-top: 10rem;
+}
+}
