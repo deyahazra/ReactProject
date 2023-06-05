@@ -27,23 +27,35 @@ const LoginForm = () => {
         })))
         .then(res=>{
             for (var i=0;i<res.data.length;i++){
-                setmatch2(res.data[i].password)
-                setMatch(res.data[i].email)
+                
+                const a=res.data[i].email
+                const b=res.data[i].password
+                // console.log(a)
+                setMatch((prev)=>[...prev,a])
+                setmatch2((prev)=>[...prev,b])
+                // setmatch2(res.data[i].password)
+                // setMatch(res.data[i].email)
+                
                 localStorage.setItem('userid',res.data[i].id)
 
     }})
-     })
+     },[])
+    // console.log(match)
+    // console.log(match2)
     const isTabletOrMobile = useMediaQuery('(max-width:1224px)');
+    
     const handleEmail=(e)=>{
         setEmail(e.target.value)
     }
-    const handlePassword=(e)=>{
+    const handlePassword=(e)=>{                                 
         setPassword(e.target.value)
     }
     const handleApi=(e)=>{
         const MySwal = withReactContent(Swal)
-        const log={email,password}
-        if (email ==match && password==match2){
+        // const log={email,password}
+        const z =match.findIndex((element)=>element==email)
+        // console.log(z)
+        if (password==match2[z]){
             localStorage.setItem("email",email)
             
             loginState.current = true

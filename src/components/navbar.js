@@ -33,16 +33,22 @@ export default function Navbar() {
   }
   // console.log(loginstate)
   // console.log(typeof(loginstate))
-  if (loginstate =='true'){
-    // console.log("SUCCESS")
-    // window.location.reload(false);
-    var loginout="LOg out"
-  }
-  else{
-    var loginout="Log In"
-  }
+  // if (loginstate =='true'){
+  //   // console.log("SUCCESS")
+  //   // window.location.reload(false);
+  //   var loginout="Log out"
+    
+  // }
+  // else{
+  //   var loginout="Log In"
+  //   localStorage.setItem("check",false)
+  // }
   const navigate=useNavigate()
-  const handleLog = () => navigate('/login')
+  const handleLog = () => 
+  {
+    localStorage.setItem("check",false)
+    navigate('/login')
+  }
   const handleLogAdmin = () => navigate('/loginadmin')
   return (
     
@@ -154,7 +160,7 @@ export default function Navbar() {
                 
                           >
                             {/* Log In */}
-                            {loginout}
+                            {loginstate? "Log Out" : "Log In"}
                           </a>
                         )}
                       </Menu.Item>

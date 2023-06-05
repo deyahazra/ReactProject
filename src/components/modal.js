@@ -3,6 +3,8 @@ import  {useState ,useEffect,useRef} from "react";
 import axios from 'axios';
 import { Link ,useNavigate} from "react-router-dom";
 import { Container } from '@mui/material';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 import Swal from 'sweetalert2'
 import withReactContent from "sweetalert2-react-content";
 // import JsonObject from "reactproject/db.json"
@@ -14,6 +16,7 @@ const Modal = ({isVisible,onClose}) => {
   const[uploadfiles,setUploadfiles]=useState([])
   
   const navigate=useNavigate()
+  const [load1,setLoad1]=useState(0)
     const [name,setName]=useState('')
     const [refresh,setRefresh]=useState(1)
     const [about,setAbout]=useState('')
@@ -58,11 +61,13 @@ const Modal = ({isVisible,onClose}) => {
       )
         .then((response) => response.json())
         .then((result) => {
+          setLoad1(1)
+          console.log(load1)
           setImgSrc2(result.data.url)
           console.log('Success:', result.data.url);
         })
         .catch((error) => {
-          console.error('Error:', error);
+          console.error('Error:', error); 
         })
         // setImgSrc(e.target.files[0])
     }
@@ -101,8 +106,19 @@ const Modal = ({isVisible,onClose}) => {
 
     if (!isVisible) return null
     return (
+      
+      <div>
+        {load1?load1:
+        <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
+        }
         <div className="fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex justify-center
         align-center items-center">
+        
             <div className="w-[600px] h-[500px] flex flex-col ">
                 <button className="text-white text-xl place-self-end" onClick={()=>onClose()}>X</button>
                 <div className="bg-white p-2 rounded modal-container-content-scroll">
@@ -186,8 +202,9 @@ const Modal = ({isVisible,onClose}) => {
                       className="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
                     >
                       <span>Upload a file</span>
+                      
                       <input  id="file-upload" name="file-upload" type="file" className="sr-only" 
-                    
+                      
                       accept='application/pdf,image/png'
                       onChange={(e)=> handleImageSrc(e)}
                       />
@@ -221,6 +238,7 @@ const Modal = ({isVisible,onClose}) => {
                 </div>
             </div>
             
+        </div>
         </div>
     )
     
