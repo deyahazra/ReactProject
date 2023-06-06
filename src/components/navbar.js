@@ -19,10 +19,10 @@ function classNames(...classes) {
 }
 
 export default function Navbar() {
-
- 
-
-  var loginstate=localStorage.getItem("check")
+  const [loginstate2,setLoginstate2]=useState(false)
+  
+    const loginstate=localStorage.getItem("check")
+  
   const handleShopping=()=>{
     if (loginstate=='true'){
       navigate('/shoppingcart')
@@ -31,22 +31,19 @@ export default function Navbar() {
       navigate('/login')
     }
   }
-  // console.log(loginstate)
-  // console.log(typeof(loginstate))
-  // if (loginstate =='true'){
-  //   // console.log("SUCCESS")
-  //   // window.location.reload(false);
-  //   var loginout="Log out"
+  
+
+  if (loginstate =='false'){
     
-  // }
-  // else{
-  //   var loginout="Log In"
-  //   localStorage.setItem("check",false)
-  // }
+    localStorage.removeItem("check")
+    
+  }
+  
   const navigate=useNavigate()
   const handleLog = () => 
   {
     localStorage.setItem("check",false)
+    
     navigate('/login')
   }
   const handleLogAdmin = () => navigate('/loginadmin')

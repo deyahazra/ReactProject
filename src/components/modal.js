@@ -16,8 +16,9 @@ const Modal = ({isVisible,onClose}) => {
   const[uploadfiles,setUploadfiles]=useState([])
   
   const navigate=useNavigate()
-  const [load1,setLoad1]=useState(0)
+  
     const [name,setName]=useState('')
+    const [load1,setLoad1]=useState(1)
     const [refresh,setRefresh]=useState(1)
     const [about,setAbout]=useState('')
     const [price,setPrice]=useState()
@@ -42,6 +43,7 @@ const Modal = ({isVisible,onClose}) => {
         setPrice(e.target.value)
     }
     const handleImageSrc=(e)=>{
+      
         // console.log(e.target.files)
         //store image url in jsonserver
         // setImgSrc(e.target.files[0].name)
@@ -50,6 +52,7 @@ const Modal = ({isVisible,onClose}) => {
         const formData = new FormData()
         formData.append('image', imageSrc)
         console.log(formData)
+        setLoad1(0)
         fetch(
         'https://api.imgbb.com/1/upload?key=05de2cf74959dfc52e18e923380e2b5f',
         {
@@ -197,10 +200,12 @@ const Modal = ({isVisible,onClose}) => {
                 <div className="text-center">
                   <PhotoIcon className="mx-auto h-12 w-12 text-gray-300" aria-hidden="true" />
                   <div className="mt-4 flex text-sm leading-6 text-gray-600">
+                  
                     <label
                       htmlFor="file-upload"
                       className="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
                     >
+                      
                       <span>Upload a file</span>
                       
                       <input  id="file-upload" name="file-upload" type="file" className="sr-only" 

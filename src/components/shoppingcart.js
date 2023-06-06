@@ -68,11 +68,12 @@ export default function ShoppingCart() {
   })
   
   console.log(prodata)
-  if(prodata==0) 
-  return 
-  (
-    <div>Empty List</div>
-  )
+  
+  if(prodata==0){ 
+  return (<div>
+    <img src="https://cdn.dribbble.com/users/634336/screenshots/2246883/media/7beefb96feac302ee313cf510fca4577.png?compress=1&resize=768x576&vertical=center" alt="empty" className="h-130 w-130"/>
+  </div>);}
+  else{
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={setOpen}>
@@ -125,7 +126,7 @@ export default function ShoppingCart() {
                               <li key={prodata.id} className="flex py-6">
                                 <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                                   <img
-                                    src={prodata.imageSrc}
+                                    src={prodata.imageSrc2}
                                     alt={prodata.imageAlt}
                                     className="h-full w-full object-cover object-center"
                                   />
@@ -197,5 +198,6 @@ export default function ShoppingCart() {
         </div>
       </Dialog>
     </Transition.Root>
-  )
+  );
+  }
 }

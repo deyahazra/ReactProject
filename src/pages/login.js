@@ -17,6 +17,7 @@ const LoginForm = () => {
     const loginState = useRef(false);
     const [match,setMatch]=useState([])
     const [match2,setmatch2]=useState([])
+    const [match3,setmatch3]=useState([])
     const [email,setEmail]=useState('')
     const [password,setPassword]=useState('')
 
@@ -30,13 +31,15 @@ const LoginForm = () => {
                 
                 const a=res.data[i].email
                 const b=res.data[i].password
+                const c=res.data[i].id
                 // console.log(a)
                 setMatch((prev)=>[...prev,a])
                 setmatch2((prev)=>[...prev,b])
+                setmatch3((prev)=>[...prev,c])
                 // setmatch2(res.data[i].password)
                 // setMatch(res.data[i].email)
                 
-                localStorage.setItem('userid',res.data[i].id)
+                // localStorage.setItem('userid',res.data[i].id)
 
     }})
      },[])
@@ -57,7 +60,7 @@ const LoginForm = () => {
         // console.log(z)
         if (password==match2[z]){
             localStorage.setItem("email",email)
-            
+            localStorage.setItem("userid",match3[z])
             loginState.current = true
             
             localStorage.setItem("check",loginState.current)
