@@ -81,18 +81,41 @@ export default function ProductDes() {
         
 // }})
 //   })
-  // const [shop,setShop]=useState([])
+  const [shop,setShop]=useState([])
   
-  const [prodata,setProdata]=useState([])
+  const [prodata,setProdata]=useState({})
   const arr=[]
   const a=[]
   var s=localStorage.getItem("proid")
   var user=localStorage.getItem("userid")
+  useEffect(()=>{
+    
+    fetch("https://json4.onrender.com/shopping/"+user)
+    .then(response=>response.json().then(data=>({
+        data:data
+    })))
+    .then(res=>{
+      console.log("len:",res.data.shop.length)
+      for (let i=0;i<res.data.shop.length;i++){
+        setShop([...shop, res.data.shop[i]])
+        
+        // setShop((prev) => {
+        //   prev.push(res.data.shop[i]);
+        //   return prev;})
+        
+        } 
+    })
+  },[])
   const handlebag=()=>{
     const MySwal = withReactContent(Swal)
-    // setShop(shop=>[...shop, 1])
     
-    const up={e,prodata}
+    setShop((prev) => {
+      prev.push(prodata);
+      return prev;})
+    
+    const up={e,shop}
+    console.log(shop)
+
     fetch("https://json4.onrender.com/shopping/"+user,{
       method:'PUT',
       headers:{"Content-Type":"application/json"},

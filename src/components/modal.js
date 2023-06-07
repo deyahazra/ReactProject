@@ -67,6 +67,7 @@ const Modal = ({isVisible,onClose}) => {
           setLoad1(1)
           console.log(load1)
           setImgSrc2(result.data.url)
+          
           console.log('Success:', result.data.url);
         })
         .catch((error) => {
@@ -93,12 +94,12 @@ const Modal = ({isVisible,onClose}) => {
           console.log(refresh)
         console.log("add")
         console.log(result.data)
-      //   MySwal.fire({ title: 'hello' }).then((result) => {
-      //     /* Read more about isConfirmed, isDenied below */
-      //     if (result.isConfirmed) {
-      //         
-      //     }
-      // })
+        Swal.fire({
+          icon: 'success',
+          title: 'Your product has been added',
+          showConfirmButton: false,
+          timer: 1500
+        })
       navigate('/dashboardadmin')
         })
         .catch(error=>{
