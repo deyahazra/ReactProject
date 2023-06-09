@@ -107,12 +107,19 @@ export default function ProductDes() {
     })
   },[])
   const handlebag=()=>{
+    var f=0
     const MySwal = withReactContent(Swal)
-    
+    for (let i=0;i<shop.length;i++){
+      if (shop[i].id==prodata.id){
+        f=1
+        
+      }
+    }
+    if (f==0){
     setShop((prev) => {
       prev.push(prodata);
       return prev;})
-    
+    }
     const up={e,shop}
     console.log(shop)
 
@@ -130,6 +137,14 @@ export default function ProductDes() {
     })
     //
     localStorage.setItem("shop",s)
+    if (f==1){
+      MySwal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Already product in cart!',
+      })
+    }
+    else{
     const Toast = MySwal.mixin({
       toast: true,
       position: 'top-end',
@@ -146,7 +161,7 @@ export default function ProductDes() {
       icon: 'success',
       title: 'Item added to Cart Successfully'
     })
-    
+  }
   }
 
 

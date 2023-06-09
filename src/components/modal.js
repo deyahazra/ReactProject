@@ -71,6 +71,13 @@ const Modal = ({isVisible,onClose}) => {
           console.log('Success:', result.data.url);
         })
         .catch((error) => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Something went wrong!',
+            footer: 'Try again later'
+          })
+          onClose()
           console.error('Error:', error); 
         })
         // setImgSrc(e.target.files[0])
@@ -105,6 +112,9 @@ const Modal = ({isVisible,onClose}) => {
         .catch(error=>{
         console.log(error)
         })
+        setTimeout(() => {
+          onClose()
+        }, 2500);
     }
 
 

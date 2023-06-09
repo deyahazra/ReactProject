@@ -16,22 +16,47 @@ const SignForm = () => {
   const [first,setFirst]=useState('')
   const [last,setLast]=useState('')
   const [emailError, setEmailError] = useState('')
+  const [isvalid, setIsvalid] = useState(false)
+  const [isFirstValid, setIsFirstValid] = useState(false)
+  const [isLastValid, setIsLastValid] = useState(false)
+  const [isEmailValid, setIsEmailValid] = useState(false)
+  const [isPasswordValid, setIsPasswordValid] = useState(false)
+  useEffect(() => {
+    if (isEmailValid && isPasswordValid && isFirstValid && isLastValid) {
+      setIsvalid(true)
+    } else {
+      setIsvalid(false)
+      
+    }
+  }, [isEmailValid, isPasswordValid,isFirstValid,isLastValid])
+ 
   const validateEmail = (e) => {
     setEmail(e.target.value)
     var email = e.target.value
 
     if (validator.isEmail(email)) {
       setEmailError('Valid Email :)')
+      setIsEmailValid(true)
     } else {
       setEmailError('Enter valid Email !')
+      setIsEmailValid(false)
     }
   }
   const firstName=(e)=>{
     setFirst(e.target.value)
-  }
+    if (e.target.value=="")
+    setIsFirstValid(false)
+    else
+      setIsFirstValid(true)
+  
+}
   const lastName=(e)=>{
     setLast(e.target.value)
-  }
+    if (e.target.value=="")
+    setIsLastValid(false)
+    else
+      setIsLastValid(true)
+    }
 
   const [errorMessage, setErrorMessage] = useState('')
   const validate = (value) => {
@@ -41,12 +66,23 @@ const SignForm = () => {
       minUppercase: 1, minNumbers: 1, minSymbols: 1
     })) {
       setErrorMessage('Is Strong Password')
+      setIsPasswordValid(true)
     } else {
       setErrorMessage('Is Not Strong Password')
+      setIsPasswordValid(false)
     }
   }
   const handleApi=()=>{
     const MySwal = withReactContent(Swal)
+    if (!isvalid){
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Something went wrong!',
+        footer: 'Enter the valid details'
+      })
+    }
+    else{
     // console.log(first,last,email,password)
     const prof={first,last,email,password}
     console.log(prof)
@@ -84,6 +120,8 @@ const SignForm = () => {
       console.log(error)
     })
   }
+  }
+
 
   return (
     <div className="cover">
@@ -122,7 +160,7 @@ const SignForm = () => {
         </Grid>
 
         <Grid item xs={12}>
-          <div onClick={handleApi} className='login-btn'>Sign Up</div>
+          <button onClick={handleApi}  className='login-btn'>Sign Up</button>
         </Grid>
         <Grid item xs={12}>
           <p className="text">Or sign up using </p>
